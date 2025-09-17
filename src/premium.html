@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Accounts - STELLARADS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles specific to premium page */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin: var(--space-xl) 0;
+        }
+        
+        .pricing-card {
+            background-color: var(--color-card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition-normal);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 20px var(--color-accent-glow);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background-color: var(--color-accent);
+            color: #000;
+            padding: 5px 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        
+        .pricing-header {
+            padding: var(--space-lg);
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: var(--space-xs);
+            color: var(--color-text-primary);
+        }
+        
+        .pricing-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: var(--space-xs);
+            font-family: var(--font-secondary);
+        }
+        
+        .pricing-period {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .pricing-features {
+            padding: var(--space-lg);
+            flex-grow: 1;
+        }
+        
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .pricing-feature i {
+            color: var(--color-accent);
+            margin-right: var(--space-sm);
+            font-size: 1.1rem;
+        }
+        
+        .pricing-feature.disabled {
+            color: var(--color-text-secondary);
+            opacity: 0.7;
+        }
+        
+        .pricing-feature.disabled i {
+            color: var(--color-text-secondary);
+        }
+        
+        .pricing-feature.highlighted {
+            font-weight: 600;
+        }
+        
+        .pricing-feature.highlighted i {
+            color: var(--color-success);
+        }
+        
+        .pricing-cta {
+            padding: var(--space-lg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-btn {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+        
+        .feature-card {
+            background-color: var(--color-card-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-normal);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 15px var(--color-accent-glow);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text-primary);
+        }
+        
+        .feature-description {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .testimonials {
+            margin: var(--space-xl) 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+        
+        .testimonial-card {
+            background-color: var(--color-card-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: var(--space-md);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--color-accent);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: var(--space-md);
+            background-color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #000;
+        }
+        
+        .testimonial-info {
+            flex: 1;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .testimonial-rating {
+            color: var(--color-accent);
+            margin-top: var(--space-xs);
+        }
+        
+        .faq-section {
+            margin: var(--space-xl) 0;
+        }
+        
+        .faq-item {
+            margin-bottom: var(--space-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: var(--space-md) var(--space-lg);
+            background-color: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(0, 229, 255, 0.1);
+        }
+        
+        .faq-answer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+            color: var(--color-text-secondary);
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-item.active .faq-question {
+            color: var(--color-accent);
+        }
+        
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 992px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-card.featured {
+                grid-column: span 2;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                grid-column: span 1;
+                transform: scale(1);
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="logo-text">STELLARADS</div>
+            </div>
+            <nav class="nav">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="post-ad.html" class="nav-link">
+                        <i class="fas fa-plus-circle nav-icon"></i>
+                        <span class="nav-text">Post Ad</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell nav-icon"></i>
+                        <span class="nav-text">Notify</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="affiliate.html" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        <span class="nav-text">Affiliate</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="section">
+            <h1 class="section-title">Premium Accounts</h1>
+            <p class="text-center mb-4">Unlock the full potential of STELLARADS with our premium account options.</p>
+            
+            <!-- Pricing Plans -->
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Free</h3>
+                        <p class="pricing-subtitle">Basic access to the platform</p>
+                        <div class="pricing-price">\u20ae 0</div>
+                        <div class="pricing-period">forever</div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Up to 3 active listings</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Basic listing visibility</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Standard search placement</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Basic analytics</span>
+                        </div>
+                        <div class="pricing-feature disabled">
+                            <i class="fas fa-times"></i>
+                            <span>Premium listing features</span>
+                        </div>
+                        <div class="pricing-feature disabled">
+                            <i class="fas fa-times"></i>
+                            <span>Enhanced visibility</span>
+                        </div>
+                        <div class="pricing-feature disabled">
+                            <i class="fas fa-times"></i>
+                            <span>Advanced analytics</span>
+                        </div>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="btn btn-secondary pricing-btn">Current Plan</button>
+                    </div>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Premium</h3>
+                        <p class="pricing-subtitle">Enhanced features and visibility</p>
+                        <div class="pricing-price">\u20ae 299</div>
+                        <div class="pricing-period">per month</div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature highlighted">
+                            <i class="fas fa-check"></i>
+                            <span>Unlimited active listings</span>
+                        </div>
+                        <div class="pricing-feature highlighted">
+                            <i class="fas fa-check"></i>
+                            <span>Premium listing visibility</span>
+                        </div>
+                        <div class="pricing-feature highlighted">
+                            <i class="fas fa-check"></i>
+                            <span>Priority search placement</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Advanced analytics dashboard</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Featured listings rotation</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Ad highlighting options</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Priority customer support</span>
+                        </div>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="btn btn-primary pricing-btn">Upgrade Now</button>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Enterprise</h3>
+                        <p class="pricing-subtitle">For businesses and power sellers</p>
+                        <div class="pricing-price">\u20ae 999</div>
+                        <div class="pricing-period">per month</div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature highlighted">
+                            <i class="fas fa-check"></i>
+                            <span>Everything in Premium</span>
+                        </div>
+                        <div class="pricing-feature highlighted">
+                            <i class="fas fa-check"></i>
+                            <span>Dedicated account manager</span>
+                        </div>
+                        <div class="pricing-feature highlighted">
+                            <i class="fas fa-check"></i>
+                            <span>API access for bulk listings</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Custom branding options</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Advanced reporting tools</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Integration with external systems</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>24/7 priority support</span>
+                        </div>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="btn btn-primary pricing-btn">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Premium Features -->
+            <section class="premium-features">
+                <h2 class="section-title">Premium Features</h2>
+                <p class="text-center mb-4">Discover the advantages of our premium accounts</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="feature-title">Enhanced Visibility</h3>
+                        <p class="feature-description">
+                            Your listings appear at the top of search results and category pages, increasing visibility by up to 300%.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Advanced Analytics</h3>
+                        <p class="feature-description">
+                            Gain insights with detailed performance metrics, visitor demographics, and conversion tracking.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h3 class="feature-title">Unlimited Listings</h3>
+                        <p class="feature-description">
+                            Post as many listings as you want without restrictions, perfect for power sellers and businesses.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="feature-title">Custom Styling</h3>
+                        <p class="feature-description">
+                            Make your listings stand out with custom backgrounds, highlights, and premium badges.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">Priority Support</h3>
+                        <p class="feature-description">
+                            Get faster responses and dedicated assistance from our premium support team.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Verified Badge</h3>
+                        <p class="feature-description">
+                            Build trust with a verified seller badge that increases buyer confidence and conversion rates.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials -->
+            <section class="testimonials">
+                <h2 class="section-title">What Our Premium Users Say</h2>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            Since upgrading to Premium, my listings get 4x more views and I've closed deals twice as fast. The enhanced visibility and analytics have completely transformed my selling experience.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">NS</div>
+                            <div class="testimonial-info">
+                                <div class="testimonial-name">Nova Stellar</div>
+                                <div class="testimonial-role">Tech Reseller</div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            The unlimited listings feature has been a game-changer for my business. I can now showcase my entire inventory without worrying about listing limits. Premium is worth every credit!
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">QT</div>
+                            <div class="testimonial-info">
+                                <div class="testimonial-name">Quantum Trader</div>
+                                <div class="testimonial-role">Collectibles Dealer</div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            The analytics dashboard has helped me understand which listings perform best and optimize my pricing strategy. My revenue has increased by 35% since upgrading to Premium.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">AT</div>
+                            <div class="testimonial-info">
+                                <div class="testimonial-name">Astro Tech</div>
+                                <div class="testimonial-role">Electronics Vendor</div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            The verified badge has significantly increased buyer trust. I'm getting more serious inquiries and fewer time-wasters. Premium has made selling on STELLARADS a much smoother experience.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">NX</div>
+                            <div class="testimonial-info">
+                                <div class="testimonial-name">Nebula Xchange</div>
+                                <div class="testimonial-role">Property Dealer</div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I upgrade to a Premium account?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Upgrading is simple! Just click on the "Upgrade Now" button and follow the payment instructions. Once your payment is processed, your account will be instantly upgraded to Premium status with all features unlocked.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I switch between account types?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, you can upgrade or downgrade your account at any time. If you downgrade from Premium to Free, you'll maintain access to Premium features until the end of your current billing cycle. Any listings beyond the Free account limit will be automatically deactivated.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We accept all major credit cards, digital wallets, and cryptocurrency payments including Bitcoin, Ethereum, and our native STELLAR tokens. Enterprise customers can also arrange for direct bank transfers or invoicing.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a discount for annual subscriptions?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! When you choose annual billing, you'll receive a 20% discount compared to monthly payments. This means you'll pay for 10 months and get 2 months free, saving \u20ae 718 per year on the Premium plan.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens to my listings if I cancel Premium?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        If you downgrade to a Free account, you'll be limited to 3 active listings. Any additional listings will be automatically deactivated but not deleted. You can choose which 3 listings to keep active, and you can reactivate others if you upgrade again or remove some active listings.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I try Premium features before committing?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! New users can try Premium features free for 14 days. You'll need to provide payment information, but you won't be charged until the trial period ends. You can cancel anytime during the trial with no obligation.
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="cta-section text-center">
+                <h2>Ready to Boost Your Listings?</h2>
+                <p class="mb-4">Join thousands of successful sellers who have transformed their experience with STELLARADS Premium.</p>
+                <button class="btn btn-primary btn-lg">Upgrade to Premium</button>
+                <p class="mt-2"><small>14-day money-back guarantee. No questions asked.</small></p>
+            </section>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h4>STELLARADS</h4>
+                    <p>The future of classified advertising. Connect, trade, and discover in our futuristic marketplace.</p>
+                </div>
+                <div class="col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Browse Listings</a></li>
+                        <li><a href="post-ad.html">Post an Ad</a></li>
+                        <li><a href="premium.html">Premium Accounts</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">My Listings</a></li>
+                        <li><a href="affiliate.html">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2025 STELLARADS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Premium page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Toggle active class on clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Pricing toggle functionality (if needed)
+            const pricingButtons = document.querySelectorAll('.pricing-btn');
+            
+            pricingButtons.forEach(button => {
+                if (button.textContent !== 'Current Plan') {
+                    button.addEventListener('click', function() {
+                        // In a real app, this would navigate to a checkout page
+                        // For demo purposes, we'll just show an alert
+                        alert('This would navigate to the checkout page in a real application.');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
