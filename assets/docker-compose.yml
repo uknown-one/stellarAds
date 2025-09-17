@@ -1,0 +1,39 @@
+
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: stellarads-server
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/stellarads
+      - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+    networks:
+      - stellarads-network
+
+  mongo:
+    image: mongo:5.0
+    container_name: stellarads-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - stellarads-network
+
+networks:
+  stellarads-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
