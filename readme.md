@@ -32,7 +32,7 @@ User Interface
 
 
 Project Structure
-
+'''
 stellarads/
 ├── src/
 │   ├── css/
@@ -46,7 +46,7 @@ stellarads/
 │   ├── premium.html           # Premium account information
 │   └── db-schema.js           # Database schema definition
 ├── README.md                  # Project documentation
-
+'''
 
 Pages
 
