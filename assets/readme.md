@@ -66,7 +66,7 @@ yarn start
  
 ## API Documentation
  
-See the [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) file for detailed information about the available endpoints, request/response formats, and authentication requirements.
+See the [/Api_Doc.md](./Api_Doc.md) file for detailed information about the available endpoints, request/response formats, and authentication requirements.
  
 ## Database Models
  
