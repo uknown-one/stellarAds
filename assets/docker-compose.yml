@@ -15,6 +15,13 @@ services:
       - PORT=3000
       - MONGODB_URI=mongodb://mongo:27017/stellarads
       - JWT_SECRET=${JWT_SECRET}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET
     volumes:
       - ./uploads:/usr/src/app/uploads
     networks:
@@ -28,6 +35,11 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+     
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+    
     networks:
       - stellarads-network
 
