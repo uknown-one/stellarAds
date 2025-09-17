@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Ad - STELLARADS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="logo-text">STELLARADS</div>
+            </div>
+            <nav class="nav">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="post-ad.html" class="nav-link active">
+                        <i class="fas fa-plus-circle nav-icon"></i>
+                        <span class="nav-text">Post Ad</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell nav-icon"></i>
+                        <span class="nav-text">Notify</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="affiliate.html" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        <span class="nav-text">Affiliate</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="section">
+            <h1 class="section-title">Post a New Ad</h1>
+            
+            <div class="account-type-toggle mb-4">
+                <div class="d-flex justify-between align-center">
+                    <div>
+                        <h3>Account Type: <span class="text-accent">Premium</span></h3>
+                        <p>You have access to premium features</p>
+                    </div>
+                    <div class="account-benefits">
+                        <span class="badge"><i class="fas fa-check"></i> Priority Listing</span>
+                        <span class="badge"><i class="fas fa-check"></i> Enhanced Visibility</span>
+                        <span class="badge"><i class="fas fa-check"></i> Analytics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="post-ad-form" class="post-ad-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" id="title" class="form-control" placeholder="Enter a catchy title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category" class="form-label">Category</label>
+                        <select id="category" class="form-control" required>
+                            <option value="">Select a category</option>
+                            <option value="tech">Tech & Gadgets</option>
+                            <option value="transport">Transportation</option>
+                            <option value="housing">Housing & Real Estate</option>
+                            <option value="services">Services</option>
+                            <option value="collectibles">Collectibles</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="price" class="form-label">Price (\u20ae)</label>
+                        <input type="number" id="price" class="form-control" placeholder="Enter price" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="condition" class="form-label">Condition</label>
+                        <select id="condition" class="form-control" required>
+                            <option value="">Select condition</option>
+                            <option value="new">Brand New</option>
+                            <option value="like-new">Like New</option>
+                            <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" class="form-control" rows="6" placeholder="Describe your item in detail" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Images</label>
+                    <div class="image-upload-container">
+                        <div class="image-upload-box">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop images or click to browse</p>
+                            <input type="file" id="image-upload" multiple accept="image/*" class="image-upload-input">
+                        </div>
+                        <div class="image-preview-container" id="image-preview">
+                            <!-- Preview images will be added here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Premium Options</label>
+                    <div class="premium-options">
+                        <div class="premium-option">
+                            <input type="checkbox" id="featured" class="premium-checkbox">
+                            <label for="featured">
+                                <span class="premium-option-title">Featured Listing</span>
+                                <span class="premium-option-description">Your ad will appear at the top of search results</span>
+                                <span class="premium-option-price">+\u20ae 50</span>
+                            </label>
+                        </div>
+                        
+                        <div class="premium-option">
+                            <input type="checkbox" id="highlight" class="premium-checkbox">
+                            <label for="highlight">
+                                <span class="premium-option-title">Highlighted Ad</span>
+                                <span class="premium-option-description">Make your ad stand out with a glowing border</span>
+                                <span class="premium-option-price">+\u20ae 30</span>
+                            </label>
+                        </div>
+                        
+                        <div class="premium-option">
+                            <input type="checkbox" id="urgent" class="premium-checkbox">
+                            <label for="urgent">
+                                <span class="premium-option-title">Urgent Tag</span>
+                                <span class="premium-option-description">Add an "Urgent" tag to attract immediate attention</span>
+                                <span class="premium-option-price">+\u20ae 25</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Contact Preferences</label>
+                    <div class="contact-options">
+                        <div class="contact-option">
+                            <input type="checkbox" id="contact-email" checked>
+                            <label for="contact-email">Email</label>
+                        </div>
+                        <div class="contact-option">
+                            <input type="checkbox" id="contact-message">
+                            <label for="contact-message">In-app messaging</label>
+                        </div>
+                        <div class="contact-option">
+                            <input type="checkbox" id="contact-phone">
+                            <label for="contact-phone">Phone</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary">Save Draft</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Post Ad</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h4>STELLARADS</h4>
+                    <p>The future of classified advertising. Connect, trade, and discover in our futuristic marketplace.</p>
+                </div>
+                <div class="col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Browse Listings</a></li>
+                        <li><a href="post-ad.html">Post an Ad</a></li>
+                        <li><a href="#">Premium Accounts</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">My Listings</a></li>
+                        <li><a href="affiliate.html">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2025 STELLARADS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Post Ad specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image upload preview
+            const imageUpload = document.getElementById('image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            
+            imageUpload.addEventListener('change', function() {
+                // Clear previous previews
+                imagePreview.innerHTML = '';
+                
+                // Create previews for each selected file
+                for (let i = 0; i < this.files.length; i++) {
+                    const file = this.files[i];
+                    
+                    if (!file.type.startsWith('image/')) continue;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const previewContainer = document.createElement('div');
+                        previewContainer.className = 'image-preview-item';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'preview-image';
+                        
+                        const removeBtn = document.createElement('button');
+                        removeBtn.className = 'remove-image';
+                        removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        removeBtn.addEventListener('click', function() {
+                            previewContainer.remove();
+                        });
+                        
+                        previewContainer.appendChild(img);
+                        previewContainer.appendChild(removeBtn);
+                        imagePreview.appendChild(previewContainer);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Form submission
+            const form = document.getElementById('post-ad-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    title: document.getElementById('title').value,
+                    category: document.getElementById('category').value,
+                    price: document.getElementById('price').value,
+                    condition: document.getElementById('condition').value,
+                    description: document.getElementById('description').value,
+                    premium: {
+                        featured: document.getElementById('featured').checked,
+                        highlight: document.getElementById('highlight').checked,
+                        urgent: document.getElementById('urgent').checked
+                    },
+                    contact: {
+                        email: document.getElementById('contact-email').checked,
+                        message: document.getElementById('contact-message').checked,
+                        phone: document.getElementById('contact-phone').checked
+                    }
+                };
+                
+                // In a real app, you would send this data to a server
+                console.log('Form submitted:', formData);
+                
+                // Show success message (simulated)
+                showSuccessMessage();
+            });
+            
+            function showSuccessMessage() {
+                // Create success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = `
+                    <div class="success-content">
+                        <i class="fas fa-check-circle success-icon"></i>
+                        <h3>Ad Posted Successfully!</h3>
+                        <p>Your ad has been submitted and will be live shortly.</p>
+                        <div class="success-actions">
+                            <a href="index.html" class="btn btn-secondary">Go to Home</a>
+                            <button class="btn btn-primary">View Your Ad</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Style the message
+                successMessage.style.position = 'fixed';
+                successMessage.style.top = '0';
+                successMessage.style.left = '0';
+                successMessage.style.width = '100%';
+                successMessage.style.height = '100%';
+                successMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                successMessage.style.display = 'flex';
+                successMessage.style.justifyContent = 'center';
+                successMessage.style.alignItems = 'center';
+                successMessage.style.zIndex = '1000';
+                
+                const successContent = successMessage.querySelector('.success-content');
+                successContent.style.backgroundColor = 'var(--color-card-bg)';
+                successContent.style.borderRadius = 'var(--radius-lg)';
+                successContent.style.padding = '3rem';
+                successContent.style.textAlign = 'center';
+                successContent.style.maxWidth = '500px';
+                successContent.style.border = '1px solid var(--color-accent)';
+                successContent.style.boxShadow = '0 0 30px var(--color-accent-glow)';
+                
+                const successIcon = successMessage.querySelector('.success-icon');
+                successIcon.style.fontSize = '4rem';
+                successIcon.style.color = 'var(--color-success)';
+                successIcon.style.marginBottom = '1rem';
+                
+                // Add to DOM
+                document.body.appendChild(successMessage);
+                
+                // Add event listener to buttons
+                const viewAdBtn = successMessage.querySelector('.btn-primary');
+                viewAdBtn.addEventListener('click', function() {
+                    // In a real app, this would navigate to the newly created ad
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
